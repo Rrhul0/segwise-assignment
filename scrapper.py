@@ -1,38 +1,58 @@
 import requests
 from bs4 import BeautifulSoup
 import os
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time
+
+driver = webdriver.Chrome()
 
 def getPosts(url):
     soup = scrape(url)
-    print(soup.prettify())
-    return soup.find_all('li', {"class":'profile-creator-shared-feed-update__container'})
+    postElements = soup.find_all('li', {"class":'profile-creator-shared-feed-update__container'})
+    posts=[]
+    for element in postElements:
+        postText = element.select_one("span.break-words > span").text
+        posts.append(postText)
+    return posts
 
-def scrape(url='https://www.example.com'):
-    client = login()
-    response = client.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    return soup
+    
+
+def scrape(url):
+    print(url)
+    driver.get(url)
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    if soup.find('h1',{"class":"header__content__heading"}):
+        print("not signed in")
+        login(redirectUrl=url)
+
+    for _ in range(4):  # Scroll multiple times to load more posts
+        driver.find_element(By.TAG_NAME, "body").send_keys(Keys.PAGE_DOWN)
+        for ele in driver.find_elements(by=By.CSS_SELECTOR,value="button.see-more"):
+            print(ele)
+            ele.click()
+        time.sleep(1)  # Wait for new posts to load
+
+    return BeautifulSoup(driver.page_source, 'html.parser')
 
 
-def login():
+def login(redirectUrl=None):
     LOGIN_PAGE = 'https://www.linkedin.com/login'
-    LOGIN_URL= 'https://www.linkedin.com/checkpoint/lg/login-submit'
-    client = requests.Session()
-    #get url, soup object and csrf token value
-    html = client.get(LOGIN_PAGE).content
-    soup = BeautifulSoup(html, "html.parser")
-    csrf = soup.find('input', dict(name='loginCsrfParam'))['value']
-    #create login parameters
-    login_information = {
-        'session_key':os.getenv("LINKEDIN_USERNAME"),
-        'session_password':os.getenv("LINKEDIN_PASSWORD"),
-        'loginCsrfParam': csrf,
-    }
+    if redirectUrl:
+        LOGIN_PAGE += f'?sessionRedirect={redirectUrl}'
+    driver.get(LOGIN_PAGE)
 
-    #try and login
+    username = driver.find_element(by='name',value="session_key")
+    password = driver.find_element(by='name',value="session_password")
+    
+    username.send_keys(os.getenv("LINKEDIN_USERNAME"))
+    password.send_keys(os.getenv("LINKEDIN_PASSWORD"))
+
     try:
-        client.post(LOGIN_URL, data=login_information)
-        print("Login Successful")
-        return client
+        rememberMe = driver.find_element(by='name',value="rememberMeOptIn")
+        rememberMe.send_keys(False)
     except:
-        print("Failed to Login")
+        pass
+
+    password.send_keys(Keys.RETURN)
