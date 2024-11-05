@@ -1,4 +1,3 @@
-import requests
 from bs4 import BeautifulSoup
 import os
 from selenium import webdriver
@@ -17,35 +16,31 @@ def getPosts(url):
         posts.append(postText)
     return posts
 
-    
 
 def scrape(url):
-    print(url)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     if soup.find('h1',{"class":"header__content__heading"}):
         print("not signed in")
-        login(redirectUrl=url)
+        login()
+        if(driver.current_url.split("?")[0]!=url):
+            driver.get(url)
 
     for _ in range(4):  # Scroll multiple times to load more posts
         driver.find_element(By.TAG_NAME, "body").send_keys(Keys.PAGE_DOWN)
-        for ele in driver.find_elements(by=By.CSS_SELECTOR,value="button.see-more"):
-            print(ele)
-            ele.click()
         time.sleep(1)  # Wait for new posts to load
 
     return BeautifulSoup(driver.page_source, 'html.parser')
 
 
-def login(redirectUrl=None):
+def login():
     LOGIN_PAGE = 'https://www.linkedin.com/login'
-    if redirectUrl:
-        LOGIN_PAGE += f'?sessionRedirect={redirectUrl}'
-    driver.get(LOGIN_PAGE)
+
+    if(driver.current_url.split("?")[0]!=LOGIN_PAGE):
+        driver.get(LOGIN_PAGE)
 
     username = driver.find_element(by='name',value="session_key")
     password = driver.find_element(by='name',value="session_password")
-    
     username.send_keys(os.getenv("LINKEDIN_USERNAME"))
     password.send_keys(os.getenv("LINKEDIN_PASSWORD"))
 

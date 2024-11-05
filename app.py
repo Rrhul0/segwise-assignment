@@ -19,6 +19,6 @@ def homePage():
 @app.route("/linkedin/")
 def linkedinProfile():
     profileUrl = request.args.get("profileUrl")
-    print(scrapper.getPosts(profileUrl))
+    posts = scrapper.getPosts(profileUrl)
     escapedProfileUrl = escape(profileUrl)
-    return render_template("linkedin.html",profileUrl=escapedProfileUrl,userName="Test user")
+    return render_template("linkedin.html",profileUrl=escapedProfileUrl,userName="Test user",posts=posts)
