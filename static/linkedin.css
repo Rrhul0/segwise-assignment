@@ -19,18 +19,12 @@ main {
 }
 
 .post {
-    /* margin: 10px; */
-    border-radius: 12px;
     text-align: justify;
-    /* overflow: hidden; */
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .welcome-msg {
     font-size: 1.5rem;
     font-weight: 500;
-    padding-inline: 10px;
-    /* margin: 20px 0; */
     text-align: justify;
 }
 

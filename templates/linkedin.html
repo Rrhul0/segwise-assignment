@@ -10,12 +10,10 @@
 <body>
     <main>
         <section>
-            <p class="title">Posts by linkedin user</p>
+            <p class="title">Latest 5 posts by linkedin user</p>
             <ol id="posts" class="posts">
                 {% for item in posts %}
                 {% set new_text = item | replace("hashtag#", '<span class="hashtag">#</span>') %}
-                
-                <!-- item2=item.replace('hashtag#', '<span class="hashtag">#</span>') -->
                 <li class="post">{{ new_text | safe }}</li>
                 {% endfor %}
             </ol>
@@ -26,8 +24,10 @@
         </section>
         <section>
             <p class="title">Parameters used at LLM</p>
-            <p class="parameter">Linkedin posts</p>
-            <p class="parameter">Modal used: mistralai/Mistral-Nemo-Instruct-2407</p>
+            <ul>
+                <li class="parameter">Linkedin user 5 latest posts</li>
+                <li class="parameter">Modal used: mistralai/Mistral-Nemo-Instruct-2407</li>
+            </ul>
         </section>
     </main>
 </body>

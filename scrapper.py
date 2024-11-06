@@ -14,6 +14,8 @@ def getPosts(url):
     postElements = soup.find_all('li', {"class":'profile-creator-shared-feed-update__container'})
     posts=[]
     for element in postElements:
+        if len(posts) ==5:
+            break
         postText = element.select_one("span.break-words > span").text
         posts.append(postText)
     return posts

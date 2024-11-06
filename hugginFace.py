@@ -6,7 +6,7 @@ client = InferenceClient(api_key=os.getenv("HUGGINGFACE_API_KEY"))
 def getMessage(posts):
     combined_posts = "\n".join(posts)
     result = ""
-    prompt = f"Create a friendly two-line LinkedIn connection message based on the user's posts: {combined_posts}"
+    prompt = f"Create a friendly two-line LinkedIn connection message based on the user's posts (only show message result): {combined_posts}"
 
     for message in client.chat_completion(
         model="mistralai/Mistral-Nemo-Instruct-2407",
