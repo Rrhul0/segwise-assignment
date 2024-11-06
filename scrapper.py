@@ -5,7 +5,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 
-driver = webdriver.Chrome()
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--headless")  # Run in headless mode
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+
+driver = webdriver.Chrome(options=chrome_options)
 
 LOGIN_PAGE = 'https://www.linkedin.com/login'
 
@@ -14,7 +19,7 @@ def getPosts(url):
     postElements = soup.find_all('li', {"class":'profile-creator-shared-feed-update__container'})
     posts=[]
     for element in postElements:
-        if len(posts) ==5:
+        if len(posts) == 5:
             break
         postText = element.select_one("span.break-words > span").text
         posts.append(postText)
