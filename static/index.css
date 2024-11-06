@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 100vw;
+}
+
+.input-form {
+    height: 60px;
+    display: flex;
+    /* flex-direction: column; */
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid red;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.input-form input {
+    overflow-x: hidden;
+    width: 100%;
+    font-size: larger;
+    outline: none;
+    border: none;
+    padding: 10px 10px 10px 20px;
+}
+
+.input-form button {
+    background-color: #e76a6a;
+    padding: 10px 20px;
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+    font-size: larger;
+    font-weight: 500;
+}

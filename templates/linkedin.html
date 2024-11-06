@@ -4,13 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{userName}} - LinkedIn (Segwise Assignment)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='linkedin.css') }}">
 </head>
 <body>
-    {{profileUrl}}
-    <ul id="posts">
-        {% for item in posts %}
-            <li>{{item}}</li>
-        {% endfor %}
-    </ul>
+    <main>
+        <section>
+            <p class="title">Posts by linkedin user</p>
+            <ol id="posts" class="posts">
+                {% for item in posts %}
+                {% set new_text = item | replace("hashtag#", '<span class="hashtag">#</span>') %}
+                
+                <!-- item2=item.replace('hashtag#', '<span class="hashtag">#</span>') -->
+                <li class="post">{{ new_text | safe }}</li>
+                {% endfor %}
+            </ol>
+        </section>
+        <section>
+            <p class="title">Curated welcome message</p>
+            <p class="welcome-msg">{{welcomeMsg}}</p>
+        </section>
+        <section>
+            <p class="title">Parameters used at LLM</p>
+            <p class="parameter">Linkedin posts</p>
+            <p class="parameter">Modal used: mistralai/Mistral-Nemo-Instruct-2407</p>
+        </section>
+    </main>
 </body>
 </html>

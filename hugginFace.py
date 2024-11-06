@@ -10,7 +10,7 @@ def getMessage(posts):
 
     for message in client.chat_completion(
         model="mistralai/Mistral-Nemo-Instruct-2407",
-        messages=[{"role": "user", "content": prompt,}],
+        messages=[{"role": "user", "content": prompt}],
         max_tokens=50,
         stream=True,
     ):

@@ -22,7 +22,6 @@ def scrape(url):
     driver.get(url)
     print(url)
     if driver.current_url.split("?")[0]!=url:
-        print("not signed in")
         login()
         if(driver.current_url.split("?")[0]!=url):
             driver.get(url)
