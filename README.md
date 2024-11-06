@@ -96,3 +96,40 @@ To set up and run this application, follow these steps:
     - **Versioning**: Keep track of different versions of your models and datasets.
 
     Huggingface_hub is widely used in the machine learning community for sharing and utilizing state-of-the-art models, making it easier to build and deploy machine learning applications.
+
+## Other tools used
+
+1. VS code
+2. Chat GPT
+3. Google
+4. Stack Overflow
+5. Git
+
+## Cost of running the app for 30 days
+
+To estimate the cost of running this app in production, we need to consider the following components:
+
+1. Hosting Costs: This depends on the hosting provider and the type of instance you choose. For example, using AWS, Google Cloud, or Azure, you might choose a small instance (e.g., t2.micro on AWS) which could cost around $10-$20 per month.
+
+2. Hugging Face API Costs: The cost of using the Hugging Face Inference API depends on the pricing plan. As of now, Hugging Face offers a free tier with limited usage and paid plans starting at $9/month for 30,000 tokens. Assuming each query uses around 1,000 tokens, 5 queries per day for 30 days would use approximately 150,000 tokens.
+
+3. Selenium Costs: If you are using a cloud-based Selenium service (e.g., BrowserStack, Sauce Labs), there might be additional costs. However, if you are running Selenium on the same server, there would be no extra cost.
+
+4. Other Costs: Additional costs might include domain registration, SSL certificates, and data transfer costs.
+
+# Example Cost Breakdown
+
+-   **Hosting**: $10-$20 per month
+-   **Hugging Face API**: Assuming 150,000 tokens, you might need a plan costing around $49/month.
+-   **Selenium**: Assuming no additional cost if running on the same server.
+-   **Miscellaneous**: $5-$10 per month for domain, SSL, etc.
+
+# Total Estimated Cost
+
+-   **Hosting**: $15 (average)
+-   **Hugging Face API**: $49
+-   **Miscellaneous**: $10
+
+**Total**: $74 per month
+
+This is a rough estimate and actual costs may vary based on your specific usage and provider pricing.
