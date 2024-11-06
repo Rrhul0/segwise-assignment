@@ -7,6 +7,8 @@ import time
 
 driver = webdriver.Chrome()
 
+LOGIN_PAGE = 'https://www.linkedin.com/login'
+
 def getPosts(url):
     soup = scrape(url)
     postElements = soup.find_all('li', {"class":'profile-creator-shared-feed-update__container'})
@@ -16,11 +18,10 @@ def getPosts(url):
         posts.append(postText)
     return posts
 
-
 def scrape(url):
     driver.get(url)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    if soup.find('h1',{"class":"header__content__heading"}):
+    print(url)
+    if driver.current_url.split("?")[0]!=url:
         print("not signed in")
         login()
         if(driver.current_url.split("?")[0]!=url):
@@ -34,8 +35,6 @@ def scrape(url):
 
 
 def login():
-    LOGIN_PAGE = 'https://www.linkedin.com/login'
-
     if(driver.current_url.split("?")[0]!=LOGIN_PAGE):
         driver.get(LOGIN_PAGE)
 
@@ -46,7 +45,7 @@ def login():
 
     try:
         rememberMe = driver.find_element(by='name',value="rememberMeOptIn")
-        rememberMe.send_keys(False)
+        rememberMe.click()
     except:
         pass
 
