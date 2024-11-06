@@ -14,8 +14,9 @@ main {
 .title {
     font-size: 1.5rem;
     font-weight: 600;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
+    padding: 20px 0 0 0;
+    border-top: 1px solid #ccc;
+    margin: 15px 0;
 }
 
 .post {
@@ -36,4 +37,51 @@ main {
 
 .parameter {
     font-weight: 500;
+}
+
+.duration {
+    display: inline;
+}
+
+.job_title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 5px 0;
+}
+.company_name {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 5px 0;
+}
+
+.experience {
+    border-bottom: 1px solid #ccc;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.experience:last-child {
+    border-bottom: none;
+}
+
+.experiences {
+    padding: 0 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.name {
+    font-size: 2rem;
+    font-weight: 600;
+    padding-top: 20px;
+    margin: 0;
+}
+
+.duration,
+.location {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: rgb(86, 86, 86);
 }

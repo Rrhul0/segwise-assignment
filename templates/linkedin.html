@@ -9,8 +9,23 @@
 </head>
 <body>
     <main>
+        <h1 class="name">{{details.name}}</h1>
+        <p class="about">{{details.about}}</p>
         <section>
-            <p class="title">Latest 5 posts by linkedin user</p>
+            <p class="title">Experiences</p>
+            <ol id="experiences" class="experiences">
+                {% for item in details.experiences %}
+                <li class="experience">
+                    <p class="job_title">{{item.job_title}}</p>
+                    <p class="company_name">{{item.company_name}}</p>
+                    <p class="duration">{{item.duration}}</p>
+                    <p class="location">{{item.location}}</p>
+                </li>
+                {% endfor %}
+            </ol>
+        </section>
+        <section>
+            <p class="title">Latest 5 posts</p>
             <ol id="posts" class="posts">
                 {% for item in posts %}
                 {% set new_text = item | replace("hashtag#", '<span class="hashtag">#</span>') %}
@@ -25,6 +40,9 @@
         <section>
             <p class="title">Parameters used at LLM</p>
             <ul>
+                <li class="parameter">Linkedin user name</li>
+                <li class="parameter">Linkedin user about</li>
+                <li class="parameter">Linkedin user experiences</li>
                 <li class="parameter">Linkedin user 5 latest posts</li>
                 <li class="parameter">Modal used: mistralai/Mistral-Nemo-Instruct-2407</li>
             </ul>

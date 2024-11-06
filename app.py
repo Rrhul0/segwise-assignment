@@ -4,12 +4,10 @@ from flask import request
 import scrapper
 import hugginFace
 from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
 # to show user provided value (html injection)
 from markupsafe import escape
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -29,11 +27,9 @@ def linkedinProfile():
         return "Invalid profile URL"
     elif (profileUrl.find("https://") == -1):
         profileUrl = "https://"+profileUrl
-    elif (profileUrl[-1] == "/"):
-        profileUrl = profileUrl[:-1]
-
-    posts = scrapper.getPosts(profileUrl+"/recent-activity/all")
-    connectionMsg = hugginFace.getMessage(posts)
-    print(connectionMsg)
+    
+    details = scrapper.getProfileDetails(profileUrl)
+    posts = scrapper.getPosts(profileUrl)
+    connectionMsg = hugginFace.getMessage(details,posts)
     escapedProfileUrl = escape(profileUrl)
-    return render_template("linkedin.html",profileUrl=escapedProfileUrl,userName="Test user",posts=posts,welcomeMsg=connectionMsg)
+    return render_template("linkedin.html",profileUrl=escapedProfileUrl,userName="Test user",posts=posts,welcomeMsg=connectionMsg,details=details)
