@@ -8,7 +8,7 @@ from typing import List
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument("--headless")  # Run in headless mode
+chrome_options.add_argument("--headless")  # Run in headless mode
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
 
