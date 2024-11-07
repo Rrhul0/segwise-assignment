@@ -4,7 +4,8 @@ This assignment/project is create personalised connection message for linkedin u
 
 ## Setup and Run
 
-To set up and run this application, follow these steps:
+To set up and run this application make sure **Google Chrome** is installed in system, and follow these steps:
+
 
 1. **Clone the repository**:
 
